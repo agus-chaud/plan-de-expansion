@@ -1,0 +1,8 @@
+RUNDEF Job
+    SELECTION INLINE,
+     PROV 02
+
+TABLE TABLE1
+    TITLE "Nivel educativo y condicion de actividad - CABA por radio censal"
+    AS AREALIST
+    OF RADIO, PERSONA.NIVEL_ED, PERSONA.CONDACT, PERSONA.EDADGRU

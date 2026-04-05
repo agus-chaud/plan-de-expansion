@@ -1,0 +1,8 @@
+RUNDEF Job
+    SELECTION INLINE,
+     PROV 02
+
+TABLE TABLE1
+    TITLE "Hacinamiento y materiales - CABA por radio censal"
+    AS AREALIST
+    OF RADIO, HOGAR.H10, HOGAR.H11_H12, HOGAR.HACIN

@@ -1,0 +1,8 @@
+RUNDEF Job
+    SELECTION INLINE,
+     PROV 02
+
+TABLE TABLE1
+    TITLE "Poblacion por sexo y edad - CABA por radio censal"
+    AS AREALIST
+    OF RADIO, PERSONA.P02, PERSONA.EDADGRU, PERSONA.EDADQUI

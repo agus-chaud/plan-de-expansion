@@ -1,0 +1,14 @@
+El Instituto Nacional de Estadística y Censos (INDEC) presenta los resultados definitivos del Censo Nacional de Población, Hogares y Viviendas 2022 (Censo 2022) hasta el nivel de fracción y radio censal. Este archivo comprimido contiene tres bases de datos que se pueden procesar con RedatamX (versión portable):
+
+-Base de viviendas particulares (Carpeta Base_VP)
+-Base de pueblos originarios, afrodescendientes e identidad de género (Carpeta Base_PO_A_IG)
+-Base de viviendas colectivas y población en situación de calle (Carpeta Base_VC_PSC)
+
+Ante dudas o consultas, no dude en enviar un correo al Centro Estadístico de Servicios (ces@indec.gob.ar) o llamar al teléfono (54-11) 5031-4632.
+
+Para mayor información sobre los metadatos de las bases de datos, se puede descargar el siguiente archivo: https://www.indec.gob.ar/ftp/cuadros/poblacion/metadatos_censo2022_redatam.zip.
+
+
+Fecha de publicación de las bases: 21 de abril de 2025.
+Fecha de actualización de las bases: 8 de julio de 2025.
+Fecha de actualización de la base de viviendas colectivas y población en situación de calle: 26 de marzo de 2026. 

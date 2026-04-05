@@ -1,0 +1,8 @@
+RUNDEF Job
+    SELECTION INLINE,
+     PROV 02
+
+TABLE TABLE1
+    TITLE "Viviendas por tipo y ocupacion - CABA por radio censal"
+    AS AREALIST
+    OF RADIO, VIVIENDA.TIPOVIVG, VIVIENDA.V02

@@ -1,0 +1,8 @@
+RUNDEF Job
+    SELECTION INLINE,
+     PROV 02
+
+TABLE TABLE1
+    TITLE "NBI y condiciones habitacionales hogares - CABA por radio censal"
+    AS AREALIST
+    OF RADIO, HOGAR.NBI, HOGAR.INMAT, HOGAR.INCALSERV, HOGAR.TOTPOBH

@@ -1,0 +1,64 @@
+# ============================================================
+# DATOS CRUDOS — demasiado pesados para git (400+ MB)
+# El compañero debe descargar estos archivos manualmente
+# según las instrucciones del README.md y data_mapping.md
+# ============================================================
+
+# Base de datos REDATAM (binarios, 400MB+)
+01_datos_raw/censo_2022/redatam_exports/Base_VP/
+
+# CSV exportados de RedatamX (se regeneran ejecutando los .rpf)
+01_datos_raw/censo_2022/redatam_exports/csv_output/
+
+# Shapefile nacional completo (67MB, duplicado innecesario)
+01_datos_raw/cartografia/MGN_2022_radios/radios_censales_MGN2022.zip
+
+# Shapefile de provincias (granularidad provincial, no útil para el análisis)
+01_datos_raw/cartografia/MGN_2022_radios/pxpciadatosok.*
+
+# ZIP duplicado (ya está extraído como pxpciadatosok.shp)
+01_datos_raw/cartografia/MGN_2022_radios/Codgeo_Pais_x_prov_datos.zip
+
+# ============================================================
+# ARCHIVOS GENERADOS (se producen ejecutando los scripts)
+# ============================================================
+02_datos_procesados/
+04_mapas/estaticos/
+04_mapas/interactivos/
+05_informe/informe_final.*
+05_informe/figuras/
+
+# ============================================================
+# PYTHON
+# ============================================================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# ============================================================
+# ENTORNO LOCAL
+# ============================================================
+.env
+.env.*
+*.local
+
+# ============================================================
+# CLAUDE CODE (configuración local, no compartir)
+# ============================================================
+.claude/
+
+# ============================================================
+# OS
+# ============================================================
+.DS_Store
+Thumbs.db
+desktop.ini
