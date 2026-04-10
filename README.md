@@ -105,7 +105,7 @@ python 03_scripts/05_mapa_interactivo.py
 |--------|-------------|
 | `01_descarga_y_limpieza.py` | Filtra radios de CABA, limpia y normaliza los XLS del INDEC |
 | `02_join_espacial.py` | Une los datos tabulares al shapefile por código de radio censal |
-| `03_calculo_indicadores.py` | Calcula el IVH como promedio normalizado de los 7 indicadores |
+| `03_calculo_indicadores.py` | Calcula el IVH como promedio normalizado de los 8 indicadores |
 | `04_mapas_estaticos.py` | Genera mapas PNG por indicador y para el IVH |
 | `05_mapa_interactivo.py` | Genera `IVH_CABA.html` con capas interactivas y tooltips |
 
@@ -120,11 +120,13 @@ python 03_scripts/05_mapa_interactivo.py
 | Piso de tierra | % de viviendas con piso de tierra o ladrillo suelto |
 | Sin agua de red | % de hogares sin acceso a red pública de agua corriente |
 | Sin red cloacal | % de hogares sin conexión a red cloacal |
-| Sin gas de red | % de hogares sin acceso a red de gas natural |
-| Sin secundario completo | % de población de 25 años o más sin secundario completo |
-| **IVH** | **Índice de Vulnerabilidad Habitacional**: promedio normalizado (0–1) de las 7 variables anteriores |
+| Sin gas de red | % de hogares sin acceso a red de gas natural (calculado como complemento de hogares con gas de red sobre total) |
+| Sin universitario completo | % de población sin nivel universitario completo (inverso de la proporción con universitario completo sobre población total) |
+| NBI (validación externa) | % de hogares con al menos 1 Necesidad Básica Insatisfecha — se conserva en el GeoDataFrame como variable de validación pero **no integra el IVH** |
+| **IVH** | **Índice de Vulnerabilidad Habitacional**: promedio normalizado (0–1) de las 7 variables que lo integran, clasificado en 5 niveles mediante Natural Breaks (Jenks) |
 
 > A mayor valor del IVH, mayor vulnerabilidad habitacional en ese radio censal.
+> La clasificación en 5 niveles utiliza el método Natural Breaks (Jenks), que minimiza la varianza intraclase y es el estándar en cartografía temática.
 
 ---
 

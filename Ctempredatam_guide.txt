@@ -1,0 +1,792 @@
+Previous trailer cannot be read: ("invalid literal for int() with base 10: b'2024-10-23T11:51:11-03:00</stEvt:when>'",)
+parsing for Object Streams
+Total pages: 37
+
+--- PAGE 1 ---
+Censo Nacional de Población, Hogares y Viviendas 2022
+Resultados deﬁnitivos
+Base de datos REDATAM
+Guía práctica para el uso de Redatam
+OCTUBRE | 2024 
+
+--- PAGE 2 ---
+Censo Nacional de Población, Hogares 
+y Viviendas de la Argentina
+Base de datos REDATAM - Guía práctica para el uso de REDATAM
+Instituto Nacional de Estadística y Censos
+Buenos Aires, octubre de 2024
+Publicaciones del INDEC
+Las publicaciones editadas por el Instituto Nacional de Estadística y Censos 
+pueden ser consultadas en www.indec.gob.ar y en el Centro Estadístico 
+de Servicios, ubicado en Av. Presidente Julio A. Roca 609 C1067ABB, 
+Ciudad Autónoma de Buenos Aires, Argentina. El horario de atención al 
+público es de 9:30 a 16:00.
+También pueden solicitarse al teléfono (54-11) 5031-4632 
+Correo electrónico: ces@indec.gob.ar
+Sitio web: www.indec.gob.ar X: @INDECArgentina 
+Facebook: /INDECArgentina Instagram: @indecargentina
+Spotify: /INDECArgentina 
+Calendario anual anticipado de informes: 
+www.indec.gob.ar/indec/web/Calendario-Fecha-0
+INDECArgentina
+Dirección: Marco Lavagna
+Dirección Técnica: Pedro Ignacio Lines
+Dirección de Gestión: Santiago Tettamanti
+Dirección General de Difusión y Comunicación: María Silvina Viazzi
+Dirección de Comunicación: Gonzalo Grandis 
+Dirección Nacional de Estadísticas Sociales y de Población: Daniel Ortega
+Dirección de Estadísticas Poblacionales: Suyay Mura
+Bases Redatam: Cristian Chisari, Carlos Dias Coelho, Eliana Di Lorenzo, Pablo 
+Espósito, Juan Carlos Nahuel, Leandro Vázquez
+Programación de Redatam 7: Pablo Bergara, Rodrigo Gonzalía
+Coordinación de Producción Gráfica y Editorial: Marcelo Costanzo
+Diseño y diagramación: Pablo Andújar, Ignacio Pello, Constanza Vázquez Gagliardi
+Revisión y corrección: Horacio Barisani, Agustina Issa, Martín Van Houtte
+Documento actualizado el 23/10/2024.
+
+--- PAGE 3 ---
+3
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+Índice
+1. Introducción...........................................................................................................................................4
+1.1 ¿Qué es Redatam?.................................................................................................................................4
+1.2 Características de Redatam............................................................................................................5
+1.3 Ventajas de Redatam..........................................................................................................................5
+2. Interfaz.....................................................................................................................................................6
+2.1 Página de inicio de Redatam INDEC..........................................................................................6
+2.2 Módulo de procesamiento general............................................................................................7
+2.3 Tipos de procesamientos disponibles.......................................................................................7
+2.4  Conjunto de parámetros.................................................................................................................8
+2.5 Paneles de salida...................................................................................................................................9
+3. Procesamiento estadístico: casos prácticos..............................................................................11
+3.1 Procesamiento de frecuencias.....................................................................................................12
+3.2 Procesamiento de cruces...............................................................................................................19
+3.3 Procesamiento de listas de áreas .............................
+
+--- PAGE 4 ---
+4
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+1. Introducción
+1.1 ¿Qué es Redatam?
+Es una herramienta digital gratuita creada por el Centro Latinoamericano y Caribeño de 
+Demografía (CELADE), División de Población de la Comisión Económica para América Latina 
+y el Caribe (CEPAL), para administrar bases de datos de gran volumen bajo una estructura 
+jerárquica de ordenamiento. 
+Una estructura jerárquica es un sistema organizado de elementos o componentes 
+en niveles, donde cada uno de ellos está subordinado a un nivel superior con un 
+grado de agregación específico. En este caso, la base de datos se organiza de manera 
+jerárquica dando origen a una estructura en la que, por ejemplo, un grupo de 
+personas forman parte de uno o más hogares, que a su vez integran una vivienda 
+dentro de un radio determinado en una fracción ubicada en un departamento, 
+partido o comuna de una jurisdicción de la Argentina.
+La herramienta permite procesar información para áreas pequeñas, como las fracciones 
+y radios censales, y por ello es utilizada por decenas de países de América Latina y el 
+Caribe, África y Asia. El acrónimo Redatam deviene de su nombre inicial “REcuperación 
+de DATos para Áreas pequeñas por Microcomputador”, publicado en 1987 para el 
+sistema operativo DOS.
+Actualmente, Redatam procesa cualquier tipo de información como, por ejemplo:
+◊ censos de población, económicos, agropecuarios y 
+mineros, entre otros
+◊ estadísticas vitales
+◊ encuestas a hogares
+◊ indicadores de educación y salud
+◊ datos de comercio exterior
+
+
+--- PAGE 5 ---
+5
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+1.2 Características de Redatam
+◊ Administra bases de datos de estructura jerárquica.
+◊ Opera bases de datos multisectoriales (combina varias bases de datos).
+◊ Encripta la base de datos que ejecuta para resguardar la identificación de registros 
+individuales.
+◊ Comprime grandes volúmenes de información.
+◊ Procesa a gran velocidad.
+◊ Extiende y expande bases.
+◊ Crea nuevas variables a partir de la información original o agrega otras de fuentes 
+externas.
+◊ Procesa información desagregada hasta niveles de mayor desagregación como los 
+radios censales.
+◊ Crea áreas de procesamiento que trascienden la estructura original (áreas de salud, 
+unidades vecinales, etc.).
+◊ Combina variables y crea indicadores agregados a cualquier nivel geográfico para su 
+posterior procesamiento en sistemas geográficos.
+1.3 Ventajas de Redatam
+ 
+Como complemento para la toma de decisiones a nivel público, privado, empresarial, educativo y ambiental, por citar algunos 
+ejemplos, las personas usuarias podrán procesar la información disponible en Redatam para desarrollar distintos tipos de 
+acciones como:
+◊ Realizar diagnósticos precisos sobre la situación demográfica, social y económica 
+de áreas geográficas específicas para comprender los desafíos y las necesidades de la 
+población.
+◊ Desagregar datos a nivel territorial para identificar grupos de población específicos que 
+pueden ser más vulnerables o requerir atención especial. 
+◊ Analizar tendencias demográficas y socioeconómicas a lo largo del tiempo, que 
+permitan identificar cambios significativos y ajustar estrategias según sea necesario.
+◊ Establecer objetivos y metas realistas, que faciliten a quienes toman decisiones a nivel 
+público y privado la comprensión de la situación actual y el establecimiento de tendencias 
+futuras.
+◊ Hacer monitoreos continuos y evaluaciones de políticas públicas a lo largo del tiempo.
+  
+
+--- PAGE 6 ---
+6
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+2. Interfaz
+Para una óptima navegación y experiencia, se recomienda consultar el sistema Redatam a través de computadoras 
+de escritorio.
+2.1 Página de inicio de Redatam INDEC
+En mayo de 2024, el Instituto Nacional de Estadística y Censos (INDEC) actualizó el sistema de procesamiento estadístico de 
+censos y encuestas con la quinta generación del software: el Redatam7 . Se puede acceder a la herramienta web desde el 
+siguiente enlace: https://redatam.indec.gob.ar/
+Desde esa página se puede acceder al procesamiento de datos en línea de los siguientes operativos estadísticos:
+◊ Censo Nacional de Población, Hogares y Viviendas 2022 (Censo 2022)
+◊ Censo Nacional de Población, Hogares y Viviendas 2010. Cuestionario básico ( Censo 
+2010 cuestionario básico)
+◊ Censo Nacional de Población, Hogares y Viviendas 2010. Cuestionario ampliado (Censo 
+2010 cuestionario ampliado)
+◊ Censo Nacional de Población, Hogares y Viviendas 2001 (Censo 2001)
+◊ Encuesta Permanente de Hogares 2003-2013 (EPH 2003-2013)
+◊ Encuesta Anual de Hogares Urbanos 2010-2014 (EAHU 2010-2014)
+
+
+--- PAGE 7 ---
+7
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+2.2 Módulo de procesamiento general
+El módulo de procesamiento de Redatam permite crear frecuencias y cruces a nivel de 
+las viviendas, de los hogares o de la población; consultar estadísticas básicas, promedios 
+y medianas; generar conteos y listas de áreas; y escribir parámetros para realizar procesos 
+personalizados. 
+También se puede consultar la documentación metodológica relacionada a la base de datos, 
+el diccionario de variables, los códigos geográficos y los códigos de actividades económicas, 
+entre otras opciones.
+2.3 Tipos de procesamientos disponibles
+Las bases de los censos y encuestas se pueden procesar mediante las siguientes opciones:
+◊ Frecuencias: permite acceder a cada una de las variables existentes en 
+la base de datos para obtener distribuciones simples a nivel de viviendas, 
+hogares y población. En otras palabras, es un procesamiento que sirve para 
+conocer la cantidad de viviendas, hogares o población según una o varias 
+características definidas.
+◊ Cruces: ejecuta procesos que permiten conocer la distribución de las 
+categorías de una variable según el comportamiento de otra u otras. Se 
+pueden realizar cruces de variables de acuerdo con la unidad seleccionada 
+(viviendas, hogares o población, dependiendo la fuente de información 
+seleccionada) o “Cruces múltiples” para combinar variables para todas 
+las unidades de información disponibles (por ejemplo: realizar una 
+combinación entre los hogares con Necesidades Básicas Insatisfechas y la 
+población por Edad en grandes grupos).
+◊ Estadísticas básicas: ofrece un conjunto de parámetros para la elabora-
+ción de estadísticas básicas, promedios, medianas o indicadores específi -
+cos como, por ejemplo, las tasas.
+
+
+--- PAGE 8 ---
+8
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+◊ Listas: brinda la posibilidad de listar la información solicitada a través de 
+dos formatos:
+• Conteos: elabora listas que contabilizan las categorías de una 
+variable para cada área geográfica y corte de área seleccionados.
+• Listas de áreas:  elabora listas con la frecuencia de todas las 
+categorías de una variable para cada área geográfica y corte 
+de área seleccionados. Estas listas se pueden realizar sobre la 
+población, la vivienda y los hogares, de forma conjunta o separada, 
+dependiendo la fuente de información seleccionada en la pantalla 
+de inicio del Redatam. A diferencia del resto de los procesamientos, 
+los resultados se muestran en una sola tabla: en las filas irán las 
+áreas geográficas y en las columnas, las variables. Además, se 
+pueden agregar los totales en filas y columnas.
+◊ Análisis de datos censales : presenta un conjunto de variables relacio -
+nadas a la estructura de población –como la pirámide de población, la 
+distribución por edades, la relación de dependencia o la relación de mas -
+culinidad y feminidad, entre otros–, los indicadores sociodemográficos  
+–fecundidad, envejecimiento y empleo– y otros indicadores predefinidos 
+–entre los que se pueden destacar el promedio de personas por viviendas, 
+relación de masculinidad y feminidad y porcentaje de población nacida en 
+el extranjero–.
+2.4 Conjunto de parámetros
+ 
+Para realizar cualquier operación, se deben ingresar un conjunto de campos que se 
+encuentran dentro del panel de procesamiento estadístico.
+1. Título de la tabla: es el nombre que llevará la tabla de datos una vez que se 
+ejecuten la serie de parámetros definidos. Si el campo se deja en blanco, el 
+sistema procesará una tabla sin título.
+2. Variables: ofrece el listado de características que definen a los universos 
+de análisis, que por lo general son las viviendas, hogares y personas.
+3. Corte de área : es el nivel de desagregación o nivel 
+
+--- PAGE 9 ---
+9
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+ventaja que tiene esta función es que permite ajustar la salida a las necesidades usuarias, reducir 
+los tiempos de procesamiento y obtener información para cruces complejos.
+Para realizar cualquier procesamiento a nivel de fracción o radio censal, se debe elegir una jurisdicción 
+específica en el campo Área geográfica.
+5. Definición del universo: en esta sección puede incluir una expresión que determine el universo de casos 
+que serán considerados en el procesamiento. Se trata de un filtro global que permite, por ejemplo, delimitar 
+los resultados de acuerdo con un conjunto de variables y categorías disponibles en la base de datos (ver más 
+sobre la utilidad del filtro en la sección 3.5). 
+• Al hacer clic en el botón “Construir filtro”, se puede seleccionar la variable y la categoría 
+deseada para filtrar los resultados finales del procesamiento. La opción predeterminada es “toda 
+la base”. En un procesamiento de “Cruces”, por ejemplo, se puede procesar la base de población 
+de acuerdo con los siguientes parámetros: “Lugar de nacimiento” por “Lugar de residencia hace 
+5 años” y establecer una “Definición del universo” para que solo se muestre a las personas por un 
+“País de nacimiento” determinado.
+6. Tipo de salida : es el formato ofrecido por Redatam para mostrar la información solicitada a través de 
+“Tablas”, “Gráficos” o “Programa”.
+De acuerdo con el tipo de procesamiento seleccionado, se pueden visualizar parámetros especiales, como:
+7. Cruce de (Fila): se encuentra disponible al elegir el procesamiento de “Cruces” y “Estadísticas” y sirve para 
+elegir la variable que aparecerá en las filas de la tabla de información a generar.
+8. Por (Columna): se encuentra disponible al elegir el procesamiento de “Cruces” y “Estadísticas” y sirve para 
+elegir cuál será la variable que figurará en las columnas de la nueva tabla de información.
+9. Por (Control): se encuentra disponible al el
+
+--- PAGE 10 ---
+10
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+2.5 Paneles de salida
+ 
+Si bien existen tres tipos de salida dentro del Sistema de procesamiento estadístico de censos y encuestas, se recomienda 
+solo usar el formato “Tabla” para una mejor experiencia.
+Una vez seleccionados los parámetros deseados y hecho el clic en el botón “Ejecutar”, la persona usuaria podrá observar los 
+datos en el formato elegido. Además de la tabla de salida que aparece dentro de la herramienta web, al pie de la información 
+se encuentra disponible la posibilidad de descargar un archivo en formatos XLS y PDF.
+
+
+--- PAGE 11 ---
+11
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+3. Procesamiento estadístico: casos prácticos
+A continuación, se listan una serie de ejemplos con distintos niveles de complejidad a partir del procesamiento de la base de 
+datos del Censo 2022, con el objetivo de conocer las funcionalidades básicas del sistema Redatam.
+Las personas, los hogares y las viviendas de la Argentina constituyen las unidades de relevamiento de un censo de población 
+y vivienda. Para cada una de ellas se relevan una serie de características que varían, o pueden variar, en cada uno de sus 
+componentes. Por ejemplo, la edad es una característica variable en la población, al igual que la cantidad de miembros 
+para los hogares o el material predominante de los pisos para las viviendas. Esas características relevadas se conocen con el 
+nombre de variables, mientras que sus componentes (es decir la distribución por grupos de edad, la cantidad de personas 
+del hogar o el tipo de material de los pisos, si se continúa con el ejemplo anterior) se denominan categorías.   
+Para iniciar el procesamiento de información es necesario acceder al enlace https://redatam.indec.gob.ar/ y elegir Censo 2022. 
+Una vez que se carga la pantalla, se debe hacer clic en la opción de “Resultados básicos”, ubicada en el menú lateral izquierdo. 
+Allí se encuentran disponibles tres grandes grupos:
+1. Viviendas particulares
+2. Viviendas colectivas y población en situación de calle
+3. Pueblos originarios, afrodescendientes e identidad de género
+Dentro de cada uno se pueden realizar los procesamientos de Frecuencias, Cruces, Estadísticas, Conteos y Listas de áreas 
+para las unidades de población, hogares y viviendas. En el primer caso, el de viviendas particulares, se pueden obtener 
+resultados a nivel de país, jurisdicción, departamento, fracción y radio. En los otros dos, la desagregación permite obtener 
+resultados hasta nivel de departamento.
+
+--- PAGE 12 ---
+12
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+3.1 Procesamiento de frecuencias
+Ejemplo 1. Población en viviendas particulares, según edad. Total del país
+1. Seleccionar las siguientes opciones del menú del procesamiento de la base de datos del Censo 2022: 
+Resultados básicos > Viviendas particulares > Frecuencias.
+2. Elegir la unidad de análisis Población.
+3. Una vez cargado el módulo de procesamiento, se puede ingresar el siguiente nombre para el título de la 
+tabla: “Población según edad calculada. Total del país. Año 2022”.
+4. Seleccionar “Edad calculada” dentro del listado de opciones de variables. El término se puede tipear o 
+buscar dentro del listado disponible.
+5. Mantener las opciones predefinidas de “País” y “Toda la base” en los campos corte de área  y área 
+geográfica.
+6. Comprobar que el tipo de salida sea “Tabla” y que el resto de los campos queden como en la captura de 
+pantalla que se comparte a continuación.
+7. Presionar el botón “Ejecutar” para iniciar el procesamiento. 
+8. Si el proceso resultó exitoso, se verá una pantalla como la que se muestra a continuación. 
+
+
+--- PAGE 13 ---
+13
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+Hacia el final de las tablas generadas se pueden elegir dos opciones de descarga para los datos: formato 
+XLSX o PDF.
+Luego de la ejecución de cada operación, se puede retornar al módulo de procesamiento para editar uno o 
+algunos de los parámetros ingresados a través del botón superior “Volver”.
+ 
+
+
+--- PAGE 14 ---
+14
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+Ejemplo 2. Población en viviendas particulares, según sexo registrado al nacer, por jurisdicción
+1. Seleccionar las siguientes opciones del menú del procesamiento de la base de datos del Censo 2022: 
+Resultados básicos > Viviendas particulares > Frecuencias.
+2. Elegir la unidad de análisis Población.
+3. Una vez cargado el módulo de procesamiento, se puede ingresar el siguiente nombre para el título de la 
+tabla: “Población en viviendas particulares, según sexo registrado al nacer, por jurisdicción. Año 2022”.
+4. Seleccionar “Sexo registrado al nacer” dentro del listado de opciones de variables. El término se puede 
+tipear o buscar dentro del listado disponible.
+5. Elegir “Provincia ” en el campo corte de área.
+6. Mantener la opción predefinida de “Toda la base” para el campo área geográfica.
+7. Comprobar que el tipo de salida sea en formato “Tabla” y que el resto de los campos queden como en la 
+captura de pantalla.
+8. Presionar el botón “Ejecutar” para iniciar el procesamiento. 
+9. Si el proceso resultó exitoso, se verá una pantalla como la que se muestra a continuación. 
+
+--- PAGE 15 ---
+15
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+La información consultada se desagrega para cada componente, según la selección que se haya realizado en el 
+campo de área geográfica. Esos cortes se identifican con el rótulo de “ÁREA”, acompañado de una codificación 
+precedida por el caracter especial “#”. 
+
+
+--- PAGE 16 ---
+16
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+Ejemplo 3. Población en viviendas particulares, según cobertura de salud. Jurisdicciones seleccionadas a través del botón 
+“Editar selección geográfica”
+1. Seleccionar las siguientes opciones del menú del procesamiento de la base de datos del Censo 2022: 
+Resultados básicos > Viviendas particulares > Frecuencias.
+2. Elegir la unidad de análisis Población.
+3. Una vez cargado el módulo de procesamiento, se puede ingresar el siguiente nombre para el título de 
+la tabla: “Población en viviendas particulares en Buenos Aires, Catamarca y Corrientes, según cobertura de 
+salud, por departamento o partido. Año 2022”.
+4. Seleccionar “Cobertura de salud” dentro del listado de opciones de variables. El término se puede tipear o 
+buscar dentro del listado disponible.
+5. Elegir “Departamento” en el campo corte de área.
+6. Elegir una jurisdicción para el campo área geográfica que, en este caso, puede ser “Buenos Aires”.
+7. Hacer clic en el botón “Editar selección geográfica” y esperar a que se abra una nueva ventana con 
+dos columnas: la izquierda, que contiene el listado de unidades geográficas y la derecha, que muestra 
+el texto de la selección.
+
+
+--- PAGE 17 ---
+17
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+ 
+8. Elegir las jurisdicciones que se desean procesar a través de un clic y controlar que la selección se vaya 
+registrando en la columna de “Texto de selección”. En este caso, se mantendrá “Buenos Aires” y se agregarán 
+“Catamarca” y “Corrientes”.
+9. Finalizada la selección, hay que dirigirse al pie de la ventana y cliquear el botón “OK” para que se cierre la 
+ventana emergente y se vuelva a la definición de parámetros.
+
+--- PAGE 18 ---
+18
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+10.  Si bien se mantiene visible solamente la opción “Buenos Aires” en el campo área geográfica, el sistema 
+ya tiene cargada la edición seleccionada anteriormente. 
+Al hacer clic sobre cada jurisdicción se desplegará el listado de partidos, departamentos o 
+comunas. Y al hacer un clic sobre los nombres, se desagregarán las unidades geográficas menores 
+y así sucesivamente. De esa manera, se pueden combinar distintos grupos, en función de las 
+necesidades usuarias.
+11. Comprobar que el tipo de salida sea en formato “Tabla”.
+12. Presionar el botón “Ejecutar” para iniciar el procesamiento. 
+13. Si el proceso resultó exitoso, se verá una pantalla como la que se muestra a continuación. 
+
+
+--- PAGE 19 ---
+19
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+Al realizar una selección geográfica específica, hay que recordar que la tabla de resultados mostrará toda la 
+información agregada en función de los parámetros ingresados, sin que se diferencien las unidades geográficas 
+más que por sus códigos .
+3.2 Procesamiento de cruces
+Ejemplo 1. Cruces de hogares con población migrante, según tenencia de escritura o boleto, por jurisdicción. Año 2022
+1. Seleccionar las siguientes opciones del menú del procesamiento de la base de datos del Censo 2022: 
+Resultados básicos > Viviendas particulares > Cruces.
+2. Elegir la unidad de análisis Hogares.
+3. Una vez cargado el módulo de procesamiento, se puede ingresar el siguiente nombre para el título de la 
+tabla: “Hogares con población migrante, según tenencia de escritura o boleto”.
+4. Seleccionar la variable “Hogar con migrantes” en Cruce de (Fila). El término se puede tipear o buscar 
+dentro del listado disponible.
+5. Seleccionar “Tenencia de escritura o boleto” en el campo Por (Columna).
+6. Elegir “Provincia” en el campo corte de área.
+7. Mantener la opción “Toda la base” en el campo área geográfica.
+8. Comprobar que el tipo de salida sea en formato “Tabla” y que el resto de los campos queden como en la 
+captura de pantalla.
+9. De forma opcional, se puede seleccionar las opciones de salida para obtener valores absolutos, porcentajes 
+en fila, porcentajes en columna o porcentajes sobre el total.
+
+
+--- PAGE 20 ---
+20
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+10.  Presionar el botón “Ejecutar” para iniciar el procesamiento. 
+11. Si el proceso resultó exitoso, se verá una pantalla como la que se muestra a continuación en la que se 
+muestran aquellos hogares en los que todos sus integrantes son migrantes internacionales y aquellos 
+en los que solo algunos de sus miembros son migrantes internacionales, de acuerdo a la tenencia de 
+escritura o boleto. 
+
+
+--- PAGE 21 ---
+21
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+Ejemplo 2. Cruces múltiples entre hogares con necesidades básicas insatisfechas (NBI) y población en viviendas particulares, 
+según grandes grupos de edad. Año 2022
+Es importante recordar que en los Cruces múltiples se pueden combinar variables de diferentes universos de análisis 
+y que, en esos casos, el programa contabilizará los casos de uno solo, priorizando el siguiente orden de universos: 1) 
+Población, 2) Hogares y 3) Viviendas. Es decir que para el ejemplo propuesto, los resultados de la consulta mostrarán 
+la cantidad de personas –distribuidas en grandes grupos de edad– que residen en hogares con necesidades básicas 
+insatisfechas porque Redatam priorizó el universo de Población. Si, por ejemplo, se mantuviera la variable de 
+necesidades básicas insatisfechas y se la cruza con tipo de vivienda (variable del universo de la vivienda), el sistema 
+contabilizará la cantidad de hogares con NBI, según el tipo de vivienda. 
+1. Seleccionar las siguientes opciones del menú del procesamiento de la base de datos del Censo 2022: 
+Resultados básicos > Viviendas particulares > Cruces. 
+2. A diferencia de los ejemplos anteriores, en este caso se deberá elegir la modalidad Múltiple. 
+3. Una vez cargado el módulo de procesamiento, se puede ingresar el siguiente nombre para el título de la 
+tabla: “Población en viviendas particulares en hogares según condición de satisfacción de las necesidades 
+básicas, por grandes grupos de edad. Total del país. Año 2022”.
+4. Seleccionar la variable “Necesidades básicas insatisfechas”. El término se puede tipear o buscar dentro del 
+listado disponible.
+5. Seleccionar “Edad en grandes grupos” en el campo Por (Columna).
+6. Mantener las opciones predefinidas de “País” y “Toda la base” en los campos corte de área y área geográfica.
+7. Comprobar que el tipo de salida sea en formato “Tabla” y que el resto de los campos queden como en la 
+captura de pantalla.
+8
+
+--- PAGE 22 ---
+22
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+Ejemplo 3. Cruces múltiples entre población en viviendas particulares por grandes grupos de edad, según sexo registrado al 
+nacer y departamento. Provincia de Misiones. Año 2022.
+1. Seleccionar las siguientes opciones del menú del procesamiento de la base de datos del Censo 2022: 
+Resultados básicos > Viviendas particulares > Cruces.
+2. Elegir la modalidad Múltiple. 
+3. Una vez cargado el módulo de procesamiento, se puede ingresar el siguiente nombre para el título de 
+la tabla: “Población en viviendas particulares por grandes grupos de edad, según sexo, por departamentos. 
+Misiones. Año 2022”.
+4. Seleccionar la variable “Edad en grandes grupos”. El término se puede tipear o buscar dentro del listado 
+disponible.
+5. Seleccionar “Sexo registrado al nacer” en el campo Por (columna).
+6. Elegir “Departamento” en el campo corte de área.
+7. Elegir “Misiones” dentro del campo área geográfica.
+8. Comprobar que el tipo de salida sea en formato “Tabla” y que el resto de los campos queden como en la 
+captura de pantalla.
+9. De forma opcional, se puede seleccionar las opciones de salida para obtener valores absolutos, porcentajes 
+en fila, porcentajes en columna o porcentajes sobre el total.
+
+--- PAGE 23 ---
+23
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+10. Presionar el botón “Ejecutar” para iniciar el procesamiento. 
+11. Si el proceso resultó exitoso, se verá una pantalla como la que se muestra a continuación. En este caso, se presentan 
+los datos de Misiones para cada uno de los departamentos, de acuerdo con la selección definida en los parámetros, 
+y a través de distintos cuadros sucesivos.
+
+
+--- PAGE 24 ---
+24
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+Ejemplo 4. Cruces de dos variables de hogares con una tercera de control
+1. Seleccionar las siguientes opciones del menú del procesamiento de la base de datos del Censo 2022: Resultados 
+básicos > Viviendas particulares > Cruces 
+2. Elegir la unidad de análisis Hogares.
+3. Una vez cargado el módulo de procesamiento, se puede ingresar el siguiente nombre para el título de la 
+tabla: “Hogares según hacinamiento, calidad de los materiales de la vivienda que habitan y propiedad de la 
+vivienda. Total del país. Año 2022”.
+4. Seleccionar “Hacinamiento del hogar” en el campo Cruce de (Fila) y “Calidad de los materiales” en el 
+campo Por (Columna). Los términos se pueden tipear o buscar dentro del listado disponible.
+5. Seleccionar “Propiedad de la vivienda” en el campo Por (Control).
+6. Mantener las opciones predefinidas de “País” y “Toda la base” en los campos corte de área  y área 
+geográfica.
+7. Comprobar que el tipo de salida sea en formato “Tabla” y que el resto de los campos queden como en la 
+captura de pantalla.
+8. De forma opcional, se puede seleccionar las opciones de salida para obtener valores absolutos, porcentajes 
+en fila, porcentajes en columna o porcentajes sobre el total.
+ 
+9. Presionar el botón “Ejecutar” para iniciar el procesamiento. 
+10. Si el proceso resultó exitoso, se verá una pantalla como la que se muestra a continuación.
+
+--- PAGE 25 ---
+25
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+3.3 Procesamiento de listas de áreas
+Ejemplo. Listas de áreas de hogares y personas en viviendas particulares según tenencia de agua, por radio censal. 
+Mendoza. Año 2022.
+1. Seleccionar las siguientes opciones del menú del procesamiento de la base de datos del Censo 2022: 
+Resultados básicos > Viviendas particulares > Lista de áreas.
+2. Elegir la unidad de análisis De hogares y personas.
+3. Una vez cargado el módulo de procesamiento, se puede ingresar el siguiente nombre para el título de la 
+tabla: “Lista de áreas de hogares y personas según tenencia de agua para la provincia de Mendoza”.
+4. Seleccionar la variable “Tenencia de agua”.
+5. Elegir “Mendoza” en el campo área geográfica y la opción “Radio” en el campo corte de área.
+6. Tildar las opciones de “Filas” y “Columnas” en el apartado de Incluir totales.
+7. Comprobar que el tipo de salida sea en formato “Tabla” y que el resto de los campos queden como en la 
+captura de pantalla.
+
+--- PAGE 26 ---
+26
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+8. Presionar el botón “Ejecutar” para iniciar el procesamiento. 
+9. Si el proceso resultó exitoso, se verá una pantalla como la que se muestra a continuación.
+A diferencia de otros tipos de procesamiento, las listas de áreas generan una tabla única que presenta a las unidades 
+geográficas en las filas y a los datos que surgen de la variable seleccionada, en las columnas.
+
+
+--- PAGE 27 ---
+27
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+Si bien el sistema permite seleccionar más de una variable, se recomienda generar listas de áreas con una sola, de 
+modo que el resultado se ajuste correctamente al formato único de tabla con encabezados simples. Si se desea 
+realizar cruces de información, la mejor opción es elegir el tipo de procesamiento de Cruces.
+3.4 Procesamiento de conteos
+Ejemplo. Conteo de la población que recibe jubilación o pensión, según jurisdicción.
+1. Seleccionar las siguientes opciones del menú del procesamiento de la base de datos del Censo 2022: 
+Resultados básicos > Viviendas particulares > Conteos.
+2. Elegir la unidad de análisis Población.
+3. Una vez cargado el módulo de procesamiento, se puede ingresar el siguiente nombre para el título de la 
+tabla: “Conteo de personas que reciben jubilación o pensión”.
+4. Seleccionar una condición, que en este caso será “Cobra jubilación o pensión”.
+5. Debajo del campo condición, hay que completar obligatoriamente el atributo que define la condición. En 
+este caso hay que seleccionar la opción “Sí”.
+6. Definir el tipo de cómputo a incluir en la tabla de salida, que puede ser “Total”, “Seleccionado”, “Porcentaje” 
+y “Porcentaje relativo”. En este caso, se seleccionará la opción “Total” (que cuenta el total de universo dentro 
+del corte de área) y “Seleccionado” (que cuenta el total de casos que cumplen con la condición seleccionada 
+dentro del corte de área).
+7. Elegir “Provincia” en el campo corte de área y mantener la opción “Toda la base” en área geográfica.
+8. Comprobar que el tipo de salida sea en formato “Tabla” y que el resto de los campos queden como en la 
+captura de pantalla.
+9. Presionar el botón “Ejecutar” para iniciar el procesamiento. 
+
+
+--- PAGE 28 ---
+28
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+10.  Si el proceso resultó exitoso, se verá una pantalla como la que se muestra a continuación, con el conteo de 
+la cantidad de personas en viviendas particulares que cobran jubilación o pensión en cada jurisdicción.
+ 
+ 
+3.5 Construcción de filtros
+Una vez que la persona usuaria define los parámetros deseados, existe la posibilidad de establecer un filtro a través de la 
+opción “Definición del universo”, mediante el ingreso de una o más expresiones que se construyen mediante la “Ventana del 
+constructor de expresiones”. Con esta función, el Redatam ofrece la posibilidad de que la persona usuaria construya su 
+propio universo de análisis.
+Para la construcción de filtros, se recomienda tener en cuenta los cuestionarios del Censo 2022, en este caso, para 
+entender a qué unidades de análisis se aplicó cada pregunta y, de esa manera, evitar construcciones erróneas en el 
+procesamiento.
+
+
+--- PAGE 29 ---
+29
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+La Ventana del constructor de expresiones se activa una vez que se cliquea el botón “Construir filtro”, disponible en el 
+campo Definición del universo ubicado en el módulo de procesamiento general. Al abrirse, se podrán identificar dos grandes 
+secciones: la superior, que contiene el campo de ingreso de expresiones y el conjunto de botones para generar operaciones 
+de relación y colocar conectores lógicos; y la inferior, que presenta el listado de unidades, variables y categorías disponibles. 
+El segmento superior está desarrollado para que la persona usuaria pueda escribir los nombres de las variables y sus 
+categorías, combinando distintas condiciones a través de los operadores lógicos o monitorear la sintaxis del filtro a partir de 
+la elección de las distintas opciones que se encuentran en el segmento inferior.
+
+
+--- PAGE 30 ---
+30
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+Ejemplo 1. Crear un filtro que considere a las viviendas particulares ocupadas del tipo “departamento”.
+1. Seleccionar las siguientes opciones del menú del procesamiento de la base de datos del Censo 2022: 
+Resultados básicos > Viviendas particulares > Frecuencias.
+2. Elegir la unidad de análisis Población. 
+3. Una vez cargado el módulo de procesamiento, se puede ingresar el siguiente nombre para el título de la 
+tabla: “Población en viviendas particulares de tipo departamento, por grupo quinquenal de edad. Total del 
+país. Año 2022”.
+4. Elegir la variable “Edad en grupos quinquenales”.
+5. Mantener las opciones predefinidas de “País” y “Toda la base” en los campos corte de área y área geográfica.
+6. Seleccionar el botón “Construir filtro” para que se abra la ventana del constructor de expresiones.
+ 
+7.  Una vez abierta la ventana, se iniciará el proceso de selección de las variables y las categorías. En este 
+caso, se definirá la unidad “Vivienda” y se seleccionará el botón “Variables” para que aparezca una segunda 
+columna con todas las opciones disponibles. Para continuar con el ejemplo, se elegirá “Tipo de vivienda 
+particular ocupada” a través de un doble clic con el botón izquierdo del mouse. Si la operación se realizó 
+con éxito, el segmento superior de la ventana debe tener incorporado el término “VIVIENDA.V01OCUP”.  
+
+--- PAGE 31 ---
+31
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+ 
+8. Hasta este momento, el filtro provisorio seleccionado aplicaría solo sobre las viviendas particulares 
+ocupadas. Pero para finalizar la operación, hay que asignarle una categoría a esta variable. Por eso, habrá que 
+navegar sobre el menú de botones superiores para seleccionar el igual (=). Una vez ingresado, hay que volver 
+al listado inferior, realizar un clic sobre “Tipo de vivienda particular ocupada” y elegir el botón “Categorías”. 
+Se abrirá una nueva columna en la que se mostrarán todos los tipos de viviendas y se hará doble clic sobre 
+“Departamento”. En el campo de ingreso de expresiones, deberá figurar la siguiente fórmula: “VIVIENDA.
+V01OCUP = 5”.
+9. Para finalizar la construcción de filtro, se debe seleccionar el botón “Aceptar”, ubicado al pie de la ventana.
+10.  Si los pasos se realizaron de forma correcta, la expresión construida en la ventana del constructor de 
+expresiones deberá aparecer en el segundo campo de definición de universo. En caso de que ese espacio 
+siga estando en blanco, será necesario repetir los pasos 4 a 7.
+
+--- PAGE 32 ---
+32
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+11. Seleccionar el botón “Ejecutar” para que el Redatam procese la base de datos de población en grupos 
+quinquenales de edad para todo el país, pero aplicando un filtro que incluya solo a quienes residen un tipo 
+de vivienda particular: “departamento”.
+Ejemplo 2. Población en viviendas particulares que cursa o asiste a algún establecimiento educativo, con un filtro combinados 
+para personas mayores a 21 años que hayan nacido en Colombia y residan en la Ciudad Autónoma de Buenos Aires.
+1. Seleccionar las siguientes opciones del menú del procesamiento de la base de datos del Censo 2022: 
+Resultados básicos > Viviendas particulares > Frecuencias.
+
+--- PAGE 33 ---
+33
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+2. Elegir la unidad de análisis Población. 
+3. Una vez cargado el módulo de procesamiento, se puede ingresar el siguiente nombre para el título de la 
+tabla: “Población en viviendas particulares nacida en Colombia, con 21 o más años, que cursa o asiste a algún 
+establecimiento educativo y que vive en la Ciudad Autónoma de Buenos Aires hace 5 años. Año 2022”.
+4. Elegir la variable “Cursa o asiste a algún establecimiento educativo”, el corte de área  “País” y el área 
+geográfica “Toda la base”.
+5. Seleccionar el botón “Construir filtro” para que se abra la ventana del constructor de expresiones.
+6. Una vez abierta la ventana, se iniciará el proceso de selección de las variables y las categorías. En 
+este caso, se definirá la unidad “Persona” y se seleccionará el botón “Variables” para que aparezca una 
+segunda columna con todas las opciones disponibles. Buscar la opción “Edad calculada” y hacer doble 
+clic. Si la operación se realizó con éxito, el segmento superior de la ventana tendrá incorporado el término 
+“PERSONA.EDAD”.
+7. Elegir el botón “>=” e ingresar el número 21 en el campo donde aparecen los términos, para que se genere 
+el filtro correspondiente a personas que tengan 21 años o más.
+8. Hacer clic en el botón “AND” para cargar una condición: las personas que hayan nacido en Colombia. 
+
+--- PAGE 34 ---
+34
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+9. Buscar en el listado la opción “País de nacimiento” y hacer doble clic. Si la operación se realizó con éxito, el 
+segmento superior de la ventana tendrá una nueva expresión: “PERSONA.P15”.
+10. Para definir el país, es necesario hacer un solo clic sobre la variable “País de nacimiento” y seleccionar el 
+botón “Categorías” para que se despliegue el listado de países en una tercera columna.
+11. Antes de hacer doble clic sobre “Colombia”, es necesario cliquear el botón “=” para que la fórmula reconozca 
+que la variable de “País de nacimiento” es igual al país especificado. Si el proceso fue exitoso, debería quedar 
+la expresión: “PERSONA.P15=205”.
+12.  Repetir el clic sobre el botón “AND” para ingresar la última condición: la jurisdicción de residencia hace 
+5 años.
+13. Buscar en el listado la opción “Provincia de residencia hace 5 años” y hacer doble clic. Si la operación se 
+realizó con éxito, el segmento superior de la ventana tendrá una nueva expresión: “PERSONA.P18”.
+
+--- PAGE 35 ---
+35
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+14. Para definir la jurisdicción, es necesario hacer un solo clic sobre la variable anterior y seleccionar el botón 
+“Categorías” para que se despliegue el listado de jurisdicciones en una tercera columna.
+15. Antes de hacer doble clic sobre “Ciudad Autónoma de Buenos Aires” (CABA), es necesario volver a cliquear 
+el botón “=” para que la fórmula reconozca que la variable de “Provincia de residencia hace 5 años” es igual a 
+CABA. Si el proceso fue exitoso, debería quedar la expresión: “PERSONA.P18=2”.
+16.  Una vez finalizado estos pasos, debería quedar el siguiente universo: “PERSONA.EDAD >= 21 AND PERSO-
+NA.P15=205 AND PERSONA.P18=2”. En pocas palabras, alcanza a las personas que tengan 21 años y más que 
+hayan nacido en Colombia y que residan hace 5 años en CABA.
+17. Para finalizar la construcción de filtro, se debe seleccionar el botón “Aceptar”, ubicado al pie de la ventana.
+18.  Si los pasos se realizaron de forma correcta, la expresión construida en la ventana del constructor de 
+expresiones deberá aparecer en el segundo campo de “Definición de universo”. En caso de que ese espacio 
+siga estando en blanco, será necesario repetir los pasos 6 a 17.
+
+
+--- PAGE 36 ---
+36
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+19. Seleccionar el botón “Ejecutar” para que el Redatam procese la base de datos de población que cursa o 
+asiste a algún establecimiento educativo según el filtro construido.
+ 
+
+--- PAGE 37 ---
+37
+República Argentina
+rRepública A gentina
+Instituto Nacional de
+Estadística y Censos
+4. Cómo citar la información
+La publicación de información obtenida a partir de las bases de datos del sistema de procesamiento estadístico de censos y 
+encuestas del INDEC debe citarse de la siguiente forma:
+Fuente: INDEC, sistema de procesamiento estadístico de censos y encuestas (Redatam - INDEC), disponible en 
+https://redatam.indec.gob.ar/

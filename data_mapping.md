@@ -66,9 +66,9 @@ La fuente correcta para radio censal es **REDATAM con Base_VP** (`redatam_export
 | Piso de tierra | `pct_piso_tierra` | `hogares_hacinamiento.rpf` | `HOGAR.H10` | cat 3 = "Tierra o ladrillo suelto" | hogares cat3 / total hogares × 100 |
 | Sin agua de red | `pct_sin_agua_red` | *(agregar a rpf)* | `HOGAR.H14` | cat ≠ 1 (1 = "Red pública") | (1 − hogares cat1 / total) × 100 |
 | Sin cloacas | `pct_sin_cloaca` | *(agregar a rpf)* | `HOGAR.H18` | cat ≠ 1 (1 = "A red pública cloaca") | (1 − hogares cat1 / total) × 100 |
-| Sin gas de red | `pct_sin_gas_red` | *(agregar a rpf)* | `HOGAR.H19` | cat ≠ 2 (2 = "Gas de red") | (1 − hogares cat2 / total) × 100 |
-| Sin secundario completo | `pct_sin_secundario` | `educacion_por_radio.rpf` | `PERSONA.NIVEL_ED` + `EDADGRU` | nivel < secundario completo, edad ≥ 25 | (1 − pob c/secundario / pob ≥25) × 100 |
-| NBI total *(bonus)* | `pct_nbi` | `hogares_nbi.rpf` | `HOGAR.NBI_TOT` | cat 1 = "Sí tiene NBI" | hogares NBI / total hogares × 100 |
+| Sin gas de red | `ivh_sin_gas_red` | *(agregar a rpf)* | `HOGAR.H19` | cat = "Gas de red" (columna directa `h19_gas_red`) | `1 - safe_div(h19_gas_red, h19_total)` |
+| Sin universitario completo | `ivh_baja_educacion_univ` | `educacion_por_radio.rpf` | `PERSONA.P08` | nivel = universitario completo (`p08_universitario_comp`) | `1 - safe_div(p08_universitario_comp, p08_total)` |
+| NBI total *(validación externa)* | `ivh_nbi` | `hogares_nbi.rpf` | `HOGAR.NBI_TOT` | cat 1 = "Sí tiene NBI" | hogares NBI / total hogares — **no integra el IVH, solo validación** |
 
 ### Dimensiones del NBI disponibles en `hogares_nbi.rpf`
 

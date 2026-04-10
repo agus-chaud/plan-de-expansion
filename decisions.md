@@ -12,10 +12,12 @@ Este documento registra las decisiones técnicas tomadas durante el desarrollo d
 | D02 | Herramienta principal de análisis              | Python (geopandas + matplotlib + folium)   |
 | D03 | Formato de datos procesados                    | GeoPackage (.gpkg)                         |
 | D04 | Sistema de referencia de coordenadas           | POSGAR 2007 para análisis + WGS84 para viz |
-| D05 | Variables de calidad de vida                   | 7 indicadores en 3 dimensiones             |
+| D05 | Variables de calidad de vida                   | 8 indicadores en 3 dimensiones             |
 | D06 | Normalización del IVH                          | Min-Max scaling entre 0 y 1               |
-| D07 | Clasificación de mapas coropléticos            | Cuantiles con 5 clases (quintiles)         |
+| D07 | Clasificación de mapas coropléticos            | Natural Breaks (Jenks) con 5 clases        |
 | D08 | Estructura de scripts                          | Pipeline secuencial numerado (01_, 02_...) |
+| D09 | NBI en el IVH                                  | Excluido del IVH; conservado como variable de validación externa |
+| D10 | Variable de educación                          | Universitario completo (invertido) en lugar de primaria completa |
 
 ---
 
@@ -72,15 +74,16 @@ Este documento registra las decisiones técnicas tomadas durante el desarrollo d
 
 ---
 
-### D05 — Variables de calidad de vida: 7 indicadores en 3 dimensiones
+### D05 — Variables de calidad de vida: 8 indicadores en 3 dimensiones
 
-**Decisión**: Usar 7 variables agrupadas en tres dimensiones: habitacional, servicios básicos y educación.
+**Decisión**: Usar 8 variables agrupadas en tres dimensiones: habitacional, servicios básicos y educación.
 
 **Alternativas consideradas**:
 - Solo NBI (Necesidades Básicas Insatisfechas), si INDEC lo publica a nivel de radio censal
 - Agregar dimensiones de salud y empleo
+- Incluir NBI como 9ª variable del IVH
 
-**Justificación técnica**: Las 7 variables seleccionadas son relevadas directamente en el Censo 2022 a nivel de vivienda u hogar, lo que garantiza disponibilidad y desagregación por radio censal. Son reconocidas internacionalmente como proxies válidos de calidad de vida urbana por organismos como CEPAL y Banco Mundial. El Censo Nacional no releva ingresos ni situación laboral detallada, por lo que las dimensiones de empleo y salud no pueden incorporarse sin recurrir a fuentes externas (EPH, SISA), lo que introduciría problemas de cobertura geográfica y temporalidad distintos. Si INDEC publica el indicador NBI desagregado por radio censal para el Censo 2022, se evaluará su incorporación como variable adicional o de validación del IVH.
+**Justificación técnica**: Las 8 variables seleccionadas son relevadas directamente en el Censo 2022 a nivel de vivienda u hogar, lo que garantiza disponibilidad y desagregación por radio censal. Son reconocidas internacionalmente como proxies válidos de calidad de vida urbana por organismos como CEPAL y Banco Mundial. El Censo Nacional no releva ingresos ni situación laboral detallada, por lo que las dimensiones de empleo y salud no pueden incorporarse sin recurrir a fuentes externas (EPH, SISA), lo que introduciría problemas de cobertura geográfica y temporalidad distintos. El NBI fue evaluado como candidato pero se excluyó del IVH por presentar multicolinealidad con otras variables del índice (ver D09); se conserva como variable de validación externa.
 
 ---
 
@@ -97,16 +100,26 @@ Este documento registra las decisiones técnicas tomadas durante el desarrollo d
 
 ---
 
-### D07 — Clasificación de mapas coropléticos: Cuantiles con 5 clases
+### D07 — Clasificación de mapas coropléticos: Natural Breaks (Jenks) con 5 clases
 
-**Decisión**: Usar clasificación por cuantiles (quintiles) para los mapas estáticos coropléticos.
+**Decisión**: Usar clasificación por Natural Breaks (Jenks, `mapclassify.NaturalBreaks(k=5)`) para los mapas estáticos coropléticos del IVH.
 
 **Alternativas consideradas**:
-- Jenks Natural Breaks
+- Cuantiles / `pd.qcut` (igual frecuencia, ~20 % de radios por clase) — opción inicial descartada
 - Equal Interval (intervalos iguales)
 - Standard Deviation (desviación estándar)
 
-**Justificación técnica**: La clasificación por cuantiles garantiza que cada clase contenga el mismo número de radios censales, produciendo mapas visualmente equilibrados aun cuando la distribución de los datos sea asimétrica —lo que ocurre con frecuencia en indicadores de vulnerabilidad, donde muchos radios concentran valores similares en los extremos. Equal Interval produce clases de igual amplitud numérica pero puede resultar en algunas clases con muy pocos o ningún polígono si la distribución no es uniforme. Standard Deviation es útil para comunicar desviaciones respecto a la media pero no es intuitivo para audiencias generales. Jenks Natural Breaks minimiza la varianza intra-clase y maximiza la inter-clase, siendo más preciso para identificar agrupamientos reales —para el mapa del IVH compuesto se evaluará adicionalmente esta clasificación, dado que el IVH puede presentar una distribución más continua y uniforme que las variables individuales.
+**Justificación técnica**: Natural Breaks minimiza la varianza intraclase y maximiza la interclase, identificando los cortes donde la distribución presenta saltos naturales. Es el estándar en cartografía temática para variables con distribución asimétrica y cola larga —exactamente el patrón que presenta el IVH de CABA (fuerte concentración entre 0,18–0,26 y una cola derecha con pocos radios muy vulnerables). Con `pd.qcut`, dos radios con IVH prácticamente idéntico podían quedar en clases distintas si se ubicaban justo en los percentiles 20/40/60/80; Jenks evita este artefacto porque los cortes responden a la estructura real de los datos. Equal Interval produce clases de igual amplitud numérica pero deja algunas clases con muy pocos polígonos cuando la distribución no es uniforme. Standard Deviation no es intuitivo para audiencias generales.
+
+**Cortes reales resultantes (IVH sobre 3.549 radios):**
+
+| Clase | Vulnerabilidad | Rango IVH | Radios |
+|-------|----------------|-----------|--------|
+| 1 | Muy baja | 0,101 – 0,204 | 817 |
+| 2 | Baja | 0,204 – 0,225 | 1.632 |
+| 3 | Moderada | 0,225 – 0,256 | 880 |
+| 4 | Alta | 0,256 – 0,364 | 217 |
+| 5 | Muy alta | 0,364 – 0,613 | 3 |
 
 ---
 
@@ -123,4 +136,30 @@ Este documento registra las decisiones técnicas tomadas durante el desarrollo d
 
 ---
 
-*Documento generado el 2026-04-03. Las decisiones se actualizan a medida que avanza el proyecto.*
+---
+
+### D09 — NBI excluido del IVH: variable de validación externa
+
+**Decisión**: Excluir `ivh_nbi` del promedio del IVH compuesto. Conservarlo en el GeoDataFrame como variable de validación externa.
+
+**Alternativas consideradas**:
+- Incluirlo como 9ª variable del IVH (opción inicial)
+- Descartarlo completamente
+
+**Justificación técnica**: El NBI presenta multicolinealidad con otras variables del índice: correlación r = 0,72 con `ivh_hacinamiento` y r = 0,45 con `ivh_techo_precario`. Esto es esperable porque el NBI por definición ya incorpora dimensiones de hacinamiento, condiciones habitacionales y saneamiento —incluirlo generaba doble peso sobre esas dimensiones sin agregar información independiente. Mantenerlo en el GeoDataFrame como variable de validación permite verificar que el IVH construido correlaciona con la medida oficial de pobreza estructural del INDEC, sin distorsionar el índice con redundancia.
+
+---
+
+### D10 — Variable de educación: universitario completo (invertido) en lugar de primaria completa
+
+**Decisión**: Reemplazar `ivh_baja_educacion` (proporción sin instrucción o con primaria completa como máximo nivel) por `ivh_baja_educacion_univ` (inverso de la proporción con universitario completo), calculada como `1 - p08_universitario_comp / p08_total`.
+
+**Alternativas consideradas**:
+- Proporción sin instrucción + primaria incompleta + primaria completa sobre total (opción inicial)
+- Proporción sin secundario completo
+
+**Justificación técnica**: La variable original sumaba las categorías de menor nivel educativo, lo que presentaba ambigüedad en la selección de corte y sensibilidad al criterio de inclusión de categorías. La nueva variable usa directamente la columna censal de universitario completo disponible en REDATAM (`p08_universitario_comp` sobre `p08_total`) e invierte la proporción para que valores altos indiquen mayor vulnerabilidad (menor proporción con universitario completo). Este enfoque es más preciso, usa una única columna fuente sin agregaciones manuales y delimita de forma clara el umbral educativo de referencia. La variable en el IVH expresa: "proporción de hogares sin nivel universitario completo".
+
+---
+
+*Documento generado el 2026-04-03. Última actualización: 2026-04-10.*
