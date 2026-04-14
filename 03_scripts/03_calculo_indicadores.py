@@ -59,6 +59,39 @@ VARS_IVH = [
     "ivh_baja_educacion_univ",
 ]
 
+# Radios con muy pocas viviendas (p. ej. hipódromo, aeropuerto) distorsionan IVH y quintiles.
+MIN_VIVIENDAS_POR_RADIO = 10
+
+# Criterio B: exclusión manual por LINK del MGN cuando el criterio A no alcanza.
+# Ampliar si aparecen otras fracciones no residenciales con h14_total >= umbral.
+LINK_EXCLUIR_MANUAL: tuple[str, ...] = ()
+
+
+def filtrar_radios_base_habitacional(gdf: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
+    """
+    Excluye radios sin base habitacional suficiente (h14_total < umbral) y,
+    opcionalmente, LINK listados en LINK_EXCLUIR_MANUAL.
+    """
+    n0 = len(gdf)
+    if "h14_total" not in gdf.columns:
+        print(
+            "  ADVERTENCIA: columna h14_total ausente; no se aplica filtro por viviendas."
+        )
+        return gdf
+
+    h14 = pd.to_numeric(gdf["h14_total"], errors="coerce")
+    mask = h14.fillna(0) >= MIN_VIVIENDAS_POR_RADIO
+    if LINK_EXCLUIR_MANUAL and "LINK" in gdf.columns:
+        mask = mask & ~gdf["LINK"].isin(LINK_EXCLUIR_MANUAL)
+
+    gdf_out = gdf.loc[mask].copy()
+    excluidos = n0 - len(gdf_out)
+    print(
+        f"  Filtro base habitacional (h14_total >= {MIN_VIVIENDAS_POR_RADIO}): "
+        f"{n0} -> {len(gdf_out)} radios ({excluidos} excluidos)"
+    )
+    return gdf_out
+
 
 def preparar_variable_educacion(gdf: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
     """
@@ -182,6 +215,9 @@ def main():
 
     # Paso 0: derivar variable de educacion invertida
     gdf = preparar_variable_educacion(gdf)
+
+    # Paso 0b: excluir radios casi sin viviendas (grandes superficies no residenciales)
+    gdf = filtrar_radios_base_habitacional(gdf)
 
     # Paso 1: analisis de correlacion con NBI (antes del calculo del IVH)
     analizar_correlacion_nbi(gdf)

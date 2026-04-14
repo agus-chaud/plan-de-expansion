@@ -6,6 +6,7 @@ mapclassify>=2.6
 openpyxl>=3.1
 seaborn>=0.13
 scikit-learn>=1.3
+osmnx>=1.9,<2
 # Opcional — autocorrelacion espacial (Moran, LISA):
 # esda>=2.5
 # libpysal>=4.9

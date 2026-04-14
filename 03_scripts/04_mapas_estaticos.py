@@ -17,6 +17,8 @@ import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use("Agg")  # backend sin ventana
 
+from osm_contexto import obtener_capas_contexto
+
 # Paths
 ROOT = Path(__file__).parent.parent
 INPUT_GPKG = ROOT / "02_datos_procesados" / "radios_CABA_ivh_final.gpkg"
@@ -38,7 +40,45 @@ COLUMNAS_TITULOS = {
 }
 
 
-def generar_mapa(gdf: gpd.GeoDataFrame, columna: str, titulo: str):
+def trazar_capas_contexto(
+    ax,
+    crs_destino,
+    capas: dict | None,
+) -> None:
+    """Dibuja cementerios, vías y avenidas OSM debajo del coropleta."""
+    if not capas:
+        return
+    z = 0
+    cem = capas.get("cemeteries")
+    if cem is not None and not cem.empty:
+        cem.to_crs(crs_destino).plot(
+            ax=ax,
+            facecolor="#bdbdbd",
+            edgecolor="#757575",
+            alpha=0.35,
+            linewidth=0.2,
+            zorder=z,
+        )
+        z += 1
+    rail = capas.get("railways")
+    if rail is not None and not rail.empty:
+        rail.to_crs(crs_destino).plot(
+            ax=ax, color="#5d4037", linewidth=0.6, alpha=0.7, zorder=z
+        )
+        z += 1
+    roads = capas.get("roads_major")
+    if roads is not None and not roads.empty:
+        roads.to_crs(crs_destino).plot(
+            ax=ax, color="#6d4c41", linewidth=0.22, alpha=0.5, zorder=z
+        )
+
+
+def generar_mapa(
+    gdf: gpd.GeoDataFrame,
+    columna: str,
+    titulo: str,
+    capas: dict | None = None,
+):
     """Generar y guardar un mapa coroplético para una variable."""
     # Filtrar filas sin dato para esa columna
     gdf_plot = gdf[gdf[columna].notna()].copy()
@@ -47,6 +87,7 @@ def generar_mapa(gdf: gpd.GeoDataFrame, columna: str, titulo: str):
         return
 
     fig, ax = plt.subplots(1, 1, figsize=(10, 12))
+    trazar_capas_contexto(ax, gdf_plot.crs, capas)
     gdf_plot.plot(
         column=columna,
         scheme="quantiles",
@@ -54,6 +95,7 @@ def generar_mapa(gdf: gpd.GeoDataFrame, columna: str, titulo: str):
         cmap="YlOrRd",
         legend=True,
         ax=ax,
+        zorder=3,
         missing_kwds={"color": "lightgrey", "label": "Sin datos"},
     )
     ax.set_title(f"{titulo}\nCABA — Censo 2022", fontsize=13, pad=12)
@@ -70,9 +112,16 @@ def main():
     gdf = gpd.read_file(INPUT_GPKG)
     print(f"Radios cargados: {len(gdf)}")
 
+    print("Capas de contexto OSM (cementerios, vías, avenidas)...")
+    capas_osm = obtener_capas_contexto(ROOT)
+    if capas_osm is None:
+        print("  Mapas sin capas OSM (sin caché y sin red o error en descarga).")
+    else:
+        print("  Capas OSM listas (desde caché o descarga).")
+
     for columna, titulo in COLUMNAS_TITULOS.items():
         if columna in gdf.columns:
-            generar_mapa(gdf, columna, titulo)
+            generar_mapa(gdf, columna, titulo, capas=capas_osm)
         else:
             print(f"SKIP: columna '{columna}' no encontrada en el GeoPackage")
 

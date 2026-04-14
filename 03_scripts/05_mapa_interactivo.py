@@ -15,6 +15,8 @@ sys.path.insert(0, str(Path(__file__).parent))
 import geopandas as gpd
 import folium
 
+from osm_contexto import obtener_capas_contexto
+
 # Paths
 ROOT = Path(__file__).parent.parent
 INPUT_GPKG = ROOT / "02_datos_procesados" / "radios_CABA_ivh_final.gpkg"
@@ -36,6 +38,57 @@ VARS_IVH = [
 
 CABA_CENTER = [-34.6037, -58.3816]
 ZOOM_START = 12
+
+
+def agregar_capas_osm_bajo_coropleta(m: folium.Map, capas: dict | None) -> None:
+    """Polígonos (cementerios) debajo del IVH para que no tapen el coropleta."""
+    if not capas:
+        return
+    fg_cem = folium.FeatureGroup(name="Cementerios (OSM)", show=False)
+    cem = capas.get("cemeteries")
+    if cem is not None and not cem.empty:
+        folium.GeoJson(
+            data=cem.to_json(),
+            style_function=lambda _f: {
+                "fillColor": "#9e9e9e",
+                "color": "#616161",
+                "weight": 1,
+                "fillOpacity": 0.28,
+                "opacity": 0.7,
+            },
+        ).add_to(fg_cem)
+    fg_cem.add_to(m)
+
+
+def agregar_capas_osm_sobre_coropleta(m: folium.Map, capas: dict | None) -> None:
+    """Líneas (vías y avenidas) encima del relleno del IVH para que se vean."""
+    if not capas:
+        return
+    fg_rail = folium.FeatureGroup(name="Vías férreas / subte / tranvía (OSM)", show=False)
+    rail = capas.get("railways")
+    if rail is not None and not rail.empty:
+        folium.GeoJson(
+            data=rail.to_json(),
+            style_function=lambda _f: {
+                "color": "#4e342e",
+                "weight": 2,
+                "opacity": 0.85,
+            },
+        ).add_to(fg_rail)
+    fg_rail.add_to(m)
+
+    fg_road = folium.FeatureGroup(name="Avenidas principales (OSM)", show=False)
+    roads = capas.get("roads_major")
+    if roads is not None and not roads.empty:
+        folium.GeoJson(
+            data=roads.to_json(),
+            style_function=lambda _f: {
+                "color": "#5d4037",
+                "weight": 1.5,
+                "opacity": 0.65,
+            },
+        ).add_to(fg_road)
+    fg_road.add_to(m)
 
 
 def main():
@@ -63,6 +116,14 @@ def main():
     # Mapa base
     m = folium.Map(location=CABA_CENTER, zoom_start=ZOOM_START, tiles="CartoDB positron")
 
+    print("Capas de contexto OSM...")
+    capas_osm = obtener_capas_contexto(ROOT)
+    if capas_osm is None:
+        print("  Sin capas OSM (sin caché y sin red o error en descarga).")
+    else:
+        agregar_capas_osm_bajo_coropleta(m, capas_osm)
+        print("  Capas OSM: cementerios bajo el IVH; vías encima del IVH (panel de capas).")
+
     # Capa choropleth — usa GeoJSON de la geometria reproyectada
     folium.Choropleth(
         geo_data=gdf[["LINK", "geometry"]].to_json(),
@@ -76,6 +137,9 @@ def main():
         name="IVH",
         nan_fill_color="lightgrey",
     ).add_to(m)
+
+    if capas_osm is not None:
+        agregar_capas_osm_sobre_coropleta(m, capas_osm)
 
     # Capa GeoJson transparente solo para tooltip
     aliases = ["Codigo"] + [v.replace("ivh_", "").replace("_", " ").title() for v in vars_presentes] + ["IVH", "Quintil"]
