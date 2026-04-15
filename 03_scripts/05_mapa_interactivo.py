@@ -22,6 +22,7 @@ ROOT = Path(__file__).parent.parent
 INPUT_GPKG = ROOT / "02_datos_procesados" / "radios_CABA_ivh_final.gpkg"
 MAPAS_INTERACTIVOS = ROOT / "04_mapas" / "interactivos"
 MAPAS_INTERACTIVOS.mkdir(parents=True, exist_ok=True)
+LINK_EXCLUIR_RENDER: tuple[str, ...] = ("020141001", "020081207")
 
 # Los 9 indicadores IVH
 VARS_IVH = [
@@ -50,11 +51,11 @@ def agregar_capas_osm_bajo_coropleta(m: folium.Map, capas: dict | None) -> None:
         folium.GeoJson(
             data=cem.to_json(),
             style_function=lambda _f: {
-                "fillColor": "#9e9e9e",
-                "color": "#616161",
-                "weight": 1,
-                "fillOpacity": 0.28,
-                "opacity": 0.7,
+                "fillColor": "#bdbdbd",
+                "color": "#757575",
+                "weight": 0.4,
+                "fillOpacity": 0.30,
+                "opacity": 0.6,
             },
         ).add_to(fg_cem)
     fg_cem.add_to(m)
@@ -70,9 +71,9 @@ def agregar_capas_osm_sobre_coropleta(m: folium.Map, capas: dict | None) -> None
         folium.GeoJson(
             data=rail.to_json(),
             style_function=lambda _f: {
-                "color": "#4e342e",
-                "weight": 2,
-                "opacity": 0.85,
+                "color": "#5d4037",
+                "weight": 0.8,
+                "opacity": 0.7,
             },
         ).add_to(fg_rail)
     fg_rail.add_to(m)
@@ -83,9 +84,9 @@ def agregar_capas_osm_sobre_coropleta(m: folium.Map, capas: dict | None) -> None
         folium.GeoJson(
             data=roads.to_json(),
             style_function=lambda _f: {
-                "color": "#5d4037",
-                "weight": 1.5,
-                "opacity": 0.65,
+                "color": "#6d4c41",
+                "weight": 0.45,
+                "opacity": 0.5,
             },
         ).add_to(fg_road)
     fg_road.add_to(m)
@@ -96,6 +97,13 @@ def main():
     print(f"Leyendo: {INPUT_GPKG}")
     gdf = gpd.read_file(INPUT_GPKG)
     print(f"Radios cargados: {len(gdf)}")
+    if "LINK" in gdf.columns:
+        n0 = len(gdf)
+        gdf = gdf.loc[~gdf["LINK"].isin(LINK_EXCLUIR_RENDER)].copy()
+        if len(gdf) != n0:
+            print(
+                f"Fallback render: excluidos {n0 - len(gdf)} radios manuales ({', '.join(LINK_EXCLUIR_RENDER)})"
+            )
 
     # Folium necesita EPSG:4326 (WGS84)
     print("Reproyectando a EPSG:4326...")

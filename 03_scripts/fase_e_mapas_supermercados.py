@@ -12,6 +12,11 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from matplotlib.colors import BoundaryNorm, ListedColormap
 from matplotlib.cm import get_cmap
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent))
+from osm_contexto import obtener_capas_contexto
 
 warnings.filterwarnings("ignore")
 
@@ -20,6 +25,7 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATOS = os.path.join(BASE, "02_datos_procesados")
 SALIDA = os.path.join(BASE, "04_mapas", "estaticos", "supermercados")
 os.makedirs(SALIDA, exist_ok=True)
+ROOT = Path(BASE)
 
 # ─── Colores por marca ─────────────────────────────────────────────────────────
 MARCA_COLORES = {
@@ -62,12 +68,50 @@ def agregar_norte(ax, x=0.97, y=0.97):
                 xytext=(x, y - 0.05),
                 arrowprops=dict(arrowstyle="->", lw=1.5))
 
+
+def trazar_capas_contexto(ax, crs_destino, capas: dict | None) -> None:
+    """Capas OSM con el mismo estilo que 04_mapas_estaticos.py."""
+    if not capas:
+        return
+    z = 0
+    cem = capas.get("cemeteries")
+    if cem is not None and not cem.empty:
+        cem.to_crs(crs_destino).plot(
+            ax=ax,
+            facecolor="#bdbdbd",
+            edgecolor="#757575",
+            alpha=0.35,
+            linewidth=0.2,
+            zorder=z,
+        )
+        z += 1
+    rail = capas.get("railways")
+    if rail is not None and not rail.empty:
+        rail.to_crs(crs_destino).plot(
+            ax=ax, color="#5d4037", linewidth=0.6, alpha=0.7, zorder=z
+        )
+        z += 1
+    roads = capas.get("roads_major")
+    if roads is not None and not roads.empty:
+        roads.to_crs(crs_destino).plot(
+            ax=ax, color="#6d4c41", linewidth=0.22, alpha=0.5, zorder=z
+        )
+
+
+print("Capas de contexto OSM (cementerios, vías, avenidas)...")
+capas_osm = obtener_capas_contexto(ROOT)
+if capas_osm is None:
+    print("  Mapas sin capas OSM (sin caché y sin red o error en descarga).")
+else:
+    print("  Capas OSM listas (desde caché o descarga).")
+
 # ─── MAPA 1: Distancia al supermercado más cercano ────────────────────────────
 print("\nGenerando Mapa 1 — Distancia al supermercado más cercano...")
 
 fig, ax = plt.subplots(1, 1, figsize=(14, 10))
 fig.patch.set_facecolor("#F8F8F8")
 ax.set_facecolor("#D6EAF8")
+trazar_capas_contexto(ax, radios.crs, capas_osm)
 
 radios.plot(
     ax=ax,
@@ -111,6 +155,7 @@ print("\nGenerando Mapa 2 — Voronoi por marca...")
 fig, ax = plt.subplots(1, 1, figsize=(14, 10))
 fig.patch.set_facecolor("#F8F8F8")
 ax.set_facecolor("#D6EAF8")
+trazar_capas_contexto(ax, radios.crs, capas_osm)
 
 # Base: límite de radios
 radios.dissolve().boundary.plot(ax=ax, color="grey", linewidth=0.5, zorder=1)
@@ -154,6 +199,7 @@ radios_plot["IVH_quintil_num"] = pd.to_numeric(radios_plot["IVH_quintil"], error
 fig, ax = plt.subplots(1, 1, figsize=(14, 10))
 fig.patch.set_facecolor("#F8F8F8")
 ax.set_facecolor("#D6EAF8")
+trazar_capas_contexto(ax, radios_plot.crs, capas_osm)
 
 # Coroplético base IVH
 radios_plot.plot(

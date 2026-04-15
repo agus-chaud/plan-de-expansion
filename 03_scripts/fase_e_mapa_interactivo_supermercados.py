@@ -12,6 +12,11 @@ import geopandas as gpd
 import folium
 from folium.plugins import FloatImage
 from branca.colormap import LinearColormap, StepColormap
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent))
+from osm_contexto import obtener_capas_contexto
 
 warnings.filterwarnings("ignore")
 
@@ -20,6 +25,7 @@ BASE   = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATOS  = os.path.join(BASE, "02_datos_procesados")
 SALIDA = os.path.join(BASE, "04_mapas", "interactivos")
 os.makedirs(SALIDA, exist_ok=True)
+ROOT = Path(BASE)
 
 # ─── Colores por marca ─────────────────────────────────────────────────────────
 MARCA_COLORES = {
@@ -51,6 +57,13 @@ print(f"  Voronoi: {len(voronoi)}")
 print(f"  Buffers: {len(buffers)}")
 print(f"  Sin cobertura: {len(sin_cobertura)}")
 
+print("Cargando capas OSM de contexto...")
+capas_osm = obtener_capas_contexto(ROOT)
+if capas_osm is None:
+    print("  Sin capas OSM (sin caché y sin red o error en descarga).")
+else:
+    print("  Capas OSM listas.")
+
 # ─── Colormap IVH (YlOrRd, 5 clases) ─────────────────────────────────────────
 IVH_COLORS = ["#FFFFB2", "#FECC5C", "#FD8D3C", "#F03B20", "#BD0026"]
 IVH_LABELS = {1: "Clase 1 — Muy baja vulnerabilidad",
@@ -74,6 +87,22 @@ mapa = folium.Map(
     tiles="CartoDB positron",
     control_scale=True,
 )
+
+if capas_osm is not None:
+    fg_cem = folium.FeatureGroup(name="Cementerios (OSM)", show=False)
+    cem = capas_osm.get("cemeteries")
+    if cem is not None and not cem.empty:
+        folium.GeoJson(
+            data=cem.to_json(),
+            style_function=lambda _f: {
+                "fillColor": "#bdbdbd",
+                "color": "#757575",
+                "weight": 0.4,
+                "fillOpacity": 0.30,
+                "opacity": 0.6,
+            },
+        ).add_to(fg_cem)
+    fg_cem.add_to(mapa)
 
 # ─── CAPA 1: IVH base (coroplético) ───────────────────────────────────────────
 print("  Capa 1: IVH base...")
@@ -111,6 +140,33 @@ capa_ivh = folium.GeoJson(
     zoom_on_click=False,
 )
 capa_ivh.add_to(mapa)
+
+if capas_osm is not None:
+    fg_rail = folium.FeatureGroup(name="Vías férreas / subte / tranvía (OSM)", show=False)
+    rail = capas_osm.get("railways")
+    if rail is not None and not rail.empty:
+        folium.GeoJson(
+            data=rail.to_json(),
+            style_function=lambda _f: {
+                "color": "#5d4037",
+                "weight": 0.8,
+                "opacity": 0.7,
+            },
+        ).add_to(fg_rail)
+    fg_rail.add_to(mapa)
+
+    fg_road = folium.FeatureGroup(name="Avenidas principales (OSM)", show=False)
+    roads = capas_osm.get("roads_major")
+    if roads is not None and not roads.empty:
+        folium.GeoJson(
+            data=roads.to_json(),
+            style_function=lambda _f: {
+                "color": "#6d4c41",
+                "weight": 0.45,
+                "opacity": 0.5,
+            },
+        ).add_to(fg_road)
+    fg_road.add_to(mapa)
 
 # ─── CAPA 2: Supermercados ────────────────────────────────────────────────────
 print("  Capa 2: Supermercados...")

@@ -24,6 +24,7 @@ ROOT = Path(__file__).parent.parent
 INPUT_GPKG = ROOT / "02_datos_procesados" / "radios_CABA_ivh_final.gpkg"
 MAPAS_ESTATICOS = ROOT / "04_mapas" / "estaticos"
 MAPAS_ESTATICOS.mkdir(parents=True, exist_ok=True)
+LINK_EXCLUIR_RENDER: tuple[str, ...] = ("020141001", "020081207")
 
 # Columnas a graficar y sus titulos
 COLUMNAS_TITULOS = {
@@ -111,6 +112,13 @@ def main():
     print(f"Leyendo: {INPUT_GPKG}")
     gdf = gpd.read_file(INPUT_GPKG)
     print(f"Radios cargados: {len(gdf)}")
+    if "LINK" in gdf.columns:
+        n0 = len(gdf)
+        gdf = gdf.loc[~gdf["LINK"].isin(LINK_EXCLUIR_RENDER)].copy()
+        if len(gdf) != n0:
+            print(
+                f"Fallback render: excluidos {n0 - len(gdf)} radios manuales ({', '.join(LINK_EXCLUIR_RENDER)})"
+            )
 
     print("Capas de contexto OSM (cementerios, vías, avenidas)...")
     capas_osm = obtener_capas_contexto(ROOT)
